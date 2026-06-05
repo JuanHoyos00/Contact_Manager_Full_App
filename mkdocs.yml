@@ -21,10 +21,6 @@ plugins:
             show_source: true
             show_root_heading: true
             heading_level: 2
-          setup_commands:
-            - import sys
-            - sys.path.insert(0, ".")
-            - sys.path.insert(0, "src")
 
 nav:
   - Home: index.md
