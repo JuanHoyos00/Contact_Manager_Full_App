@@ -92,16 +92,7 @@ La disposición de los directorios refleja el desacoplamiento de responsabilidad
 
 ## ⚙️ Variables de Envorno Necesarias
 
-El sistema cuenta con un gestor inteligente de configuración que altera el comportamiento de almacenamiento sin modificar una sola línea de código. Copia y crea un archivo llamado `.env` en la raíz del proyecto:
-
-```env
-# URL base de conexión para el Frontend interactivo
-API_URL=http://localhost:8000
-
-# Estrategia de almacenamiento activa: Elige "json" (local) o "supabase" (nube)
-STORAGE_STRATEGY=json
-
-# Credenciales Cloud (Requeridas únicamente si STORAGE_STRATEGY=supabase)
+```
 SUPABASE_URL=https://tu-id-de-proyecto.supabase.co
 SUPABASE_KEY=tu-token-secreto-url-safe-de-supabase
 ```
