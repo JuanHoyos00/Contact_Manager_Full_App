@@ -19,19 +19,23 @@ jobs:
       with:
         python-version: "3.12"
 
-    - name: Install UV Toolchain
-      run: curl -sSf https://rye.astral.sh/uv/install.sh | sh
-      
+    - name: Setup UV Toolchain
+      uses: astral-sh/setup-uv@v5
+      with:
+        version: "latest"
+
     - name: Install Project Dependencies
-      run: uv sync
+      run: uv sync --all-groups
 
     - name: Run Ruff Linter & Code Style Check
       run: uv run ruff check src/
 
     - name: Evaluate Cyclomatic Complexity (Radon Category A)
-      run: |
-        uv pip install radon
-        uv run radon cc src/ -s -n A
+      # Apuntamos exactamente a los archivos sueltos y directorios de tu árbol de carpetas
+      run: uv run radon cc src/api src/models src/storage src/services.py src/exceptions.py -s -n A
 
     - name: Execute Automated Unit Tests (Pytest)
+      # Inyectamos el directorio src en el PATH para evitar errores de importación en el servidor
+      env:
+        PYTHONPATH: src
       run: uv run pytest

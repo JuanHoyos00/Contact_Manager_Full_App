@@ -15,7 +15,7 @@ jobs:
       - name: Configure Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.12" # 👈 Corregido: Forzamos la versión estable de tu proyecto
+          python-version: "3.12"
 
       - run: echo "cache_id=$(date --utc +%Y%m%d)" >> $GITHUB_ENV
       
@@ -27,8 +27,10 @@ jobs:
             mkdocs-material-
             
       - name: Install dependencies
-        # Congelamos las librerías a versiones estables y compatibles con tu pyproject.toml
         run: pip install "mkdocs-material>=9.5.0" "mkdocstrings-python>=1.10.0"
         
       - name: Deploy Documentation
+        # Le indicamos explícitamente a MkDocs que busque los módulos desde la raíz del proyecto
+        env:
+          PYTHONPATH: .
         run: mkdocs gh-deploy --force
