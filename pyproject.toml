@@ -1,0 +1,43 @@
+[project]
+name = "contact-manager-full-app"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.136.1",
+    "plotly>=6.8.0",
+    "pydantic-settings>=2.14.1",
+    "pytest>=9.0.3",
+    "radon>=6.0.1",
+    "requests>=2.34.2",
+    "rich>=15.0.0",
+    "streamlit>=1.58.0",
+    "supabase>=2.25.1",
+    "typer>=0.25.1",
+    "uvicorn>=0.47.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
+[dependency-groups]
+dev = [
+    "mkdocs-material>=9.7.6",
+    "mkdocstrings-python>=2.0.3",
+    "ruff>=0.15.16",
+]
+
+[tool.ruff]
+target-version = "py312"
+src = ["src/api", "src/models", "src/storage", "src/services.py", "src/exceptions.py"]
+line-length = 120
+# Forzar a Ruff a ignorar por completo los archivos de Streamlit
+extend-exclude = ["src/frontend"]
+
+[tool.ruff.lint]
+select = ["E", "F", "C90", "I"]
+ignore = []
+
+[tool.ruff.lint.mccabe]
+max-complexity = 5
