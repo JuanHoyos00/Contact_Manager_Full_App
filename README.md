@@ -129,7 +129,7 @@ El servidor levantará la API REST y construirá dinámicamente la documentació
 
 ```bash
 # Inicializar el backend en modo desarrollo
-uv run fastapi dev src/api/main.py
+ uv run uvicorn src.api.main:app --reload
 ```
 * 💡 **Interacción de la API:** Abre tu navegador web e ingresa a **`http://localhost:8000/docs`** para realizar pruebas de peticiones HTTP directamente desde la interfaz de Swagger.
 
