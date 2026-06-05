@@ -11,18 +11,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      
       - name: Configure Python
         uses: actions/setup-python@v5
         with:
-          python-version: 3.x
+          python-version: "3.12" # 👈 Corregido: Forzamos la versión estable de tu proyecto
+
       - run: echo "cache_id=$(date --utc +%Y%m%d)" >> $GITHUB_ENV
+      
       - uses: actions/cache@v4
         with:
           key: mkdocs-material-${{ env.cache_id }}
           path: .cache
           restore-keys: |
             mkdocs-material-
+            
       - name: Install dependencies
-        run: pip install mkdocs-material mkdocstrings-python
+        # Congelamos las librerías a versiones estables y compatibles con tu pyproject.toml
+        run: pip install "mkdocs-material>=9.5.0" "mkdocstrings-python>=1.10.0"
+        
       - name: Deploy Documentation
         run: mkdocs gh-deploy --force
